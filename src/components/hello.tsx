@@ -5,8 +5,11 @@ export interface HelloProps {
     framework: string;
 }
 
+
+
+
 export class Hello extends React.Component<HelloProps, {}>{
     render() {
-        return <h1>Hello this is {this.props.compiler} and {this.props.framework}!</h1>;
+        return <h1>Hello this is the Xlib framework running with {this.props.compiler} and {this.props.framework}!</h1>;
     }
 }

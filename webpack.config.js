@@ -1,7 +1,13 @@
-﻿module.exports = {
+﻿//make a "webpak.dev.config.js" without uglifyJsPlugin minifier later
+
+module.exports = {
+    debug: true,
     entry: "./src/index.tsx",
     output: {
         filename: "./dist/bundle.js",
+        //library: "xlib",
+        //libraryTarget: "umd",
+        //umdNamedDefine:true,
     },
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
@@ -9,14 +15,57 @@
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
+    /**
+    module.loaders
+
+    A array of automatically applied loaders.
+
+    Each item can have these properties:
+
+    test: A condition that must be met
+    exclude: A condition that must not be met
+    include: A condition that must be met
+    loader: A string of "!" separated loaders
+    loaders: A array of loaders as string
+    A condition can be a RegExp, an absolute path start, or an array of one of these combined with "and".
+
+    exclude: [/bower_components/, /node_modules/] 
+    */
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader",
+                exclude: /.*node_modules.*/, //only process local files
+            },            
+
+            ////es2015 to es5.  see https://github.com/babel/babel-loader
+            ////requires npm install babel-loader babel-core babel-preset-es2015 --save-dev
+            //{
+            //    test: /\.js$/,
+            //    loader: 'babel-loader',
+            //    query: {
+            //        presets: ['es2015'],
+            //        cacheDirectory: [true],
+            //    },
+            //    exclude: /.*node_modules.webpack.*/, //excludes webpack internal modules, which fail preloads
+            //}
         ],
         preLoaders: [
             // All output '.js' files will have any sourcemaps re­processed by 'source-map-loader'.
-            { test: /\.js$/, loader: "source-map-loader" }
+            {
+                test: /\.js$/,
+                loader: "source-map-loader",
+                //include:/.*xlib.*/,  //works, kinda.   only does sourcemaps for xlib.
+                //exclude: /.*webpack.*/, //excludes everything, as they have the load pattern "webpack:///./~/module/subpath/file.js"
+                //exclude:/.*\(webpack\).*/, //doesn't work
+                //exclude: /.*node_modules.*/, //excludes everything
+                //exclude: "/node_modules/", //doesn't work
+                exclude: /.*node_modules.webpack.*/, //excludes webpack internal modules, which fail preloads
+                //exclude: /.*node_modules\\webpack.*/, //works, BUT ONLY ON WINDOWS due to the forward slash.   excludes webpack internal modules                
+            },
+            { test: /\.json$/, loader: "json-loader" },
         ]
     },
     // When importing a module whose path matches one of the following, just
@@ -27,4 +76,15 @@
         "react": "React",
         "react-dom": "ReactDOM"
     },
+    ////enable these when we get webpack modules working properly
+    //plugins: [
+    //    new uglifyJsPlugin({
+    //        compress: {
+    //            warnings: false
+    //        }
+    //    })
+    //],
+    //eslint: {
+    //    configFile: '.eslintrc'
+    //},
 };

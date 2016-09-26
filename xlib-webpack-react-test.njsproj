@@ -3,7 +3,7 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>react-webpack-test</Name>
+    <Name>xlib-webpack-react-test</Name>
     <RootNamespace>react-webpack-test</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -11,7 +11,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>464aa7a0-1fe6-41e4-8ed1-a1433bc6361d</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
+    <ProjectHome>
+    </ProjectHome>
     <StartupFile>
     </StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
@@ -39,21 +40,18 @@
     <Content Include="README.md" />
     <Content Include="src\components\hello.tsx" />
     <Content Include="src\index.tsx" />
+    <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="node_modules\base64url\" />
-    <Folder Include="node_modules\base64url\typings\" />
-    <Folder Include="node_modules\base64url\typings\globals\" />
-    <Folder Include="node_modules\base64url\typings\globals\node\" />
+    <Folder Include="scripts\" />
     <Folder Include="src\" />
     <Folder Include="src\components\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="node_modules\base64url\typings\globals\node\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\base64url\typings\index.d.ts" />
+    <TypeScriptCompile Include="src\app.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
