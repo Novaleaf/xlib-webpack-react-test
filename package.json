@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jasons@novaleaf.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "json-loader": "^0.5.4",
     "mocha": "^3.0.2",
