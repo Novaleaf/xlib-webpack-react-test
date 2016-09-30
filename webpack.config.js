@@ -1,8 +1,13 @@
 ﻿//make a "webpak.dev.config.js" without uglifyJsPlugin minifier later
 
+var webpack = require("webpack");
+
 module.exports = {
     debug: true,
-    entry: "./src/index.tsx",
+	entry: {
+		app: "./src/index.tsx",
+		xlib:["xlib"],
+	},
     output: {
         filename: "./dist/bundle.js",
         //library: "xlib",
@@ -38,8 +43,12 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: "ts-loader",
                 exclude: /.*node_modules.*/, //only process local files
-            },            
-
+			},   
+			// no-op the source-map-support module, which provides proper loading/consumption of source maps (useful for typescript) on nodejs
+			{
+				test: /.*[/\\]source-map-support[/\\]source-map-support\.js$/,
+				loader:"null-loader",
+			},
             ////es2015 to es5.  see https://github.com/babel/babel-loader
             ////requires npm install babel-loader babel-core babel-preset-es2015 --save-dev
             //{
@@ -74,16 +83,32 @@ module.exports = {
     // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
         "react": "React",
-        "react-dom": "ReactDOM"
+		"react-dom": "ReactDOM",
     },
     ////enable these when we get webpack modules working properly
-    //plugins: [
-    //    new uglifyJsPlugin({
-    //        compress: {
-    //            warnings: false
-    //        }
-    //    })
-    //],
+	//builtin plugins such as webpack.optimize.* can be found here: 	https://webpack.github.io/docs/list-of-plugins.html#optimize
+	plugins: [
+
+        //new uglifyJsPlugin({
+        //    compress: {
+        //        warnings: false
+        //    }
+        //}),
+
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			},
+		}),
+		//vendor chunk
+		new webpack.optimize.CommonsChunkPlugin({
+			name: "xlib",
+			filename: "dist/xlib.js",
+			minChunks: Infinity,			
+		}),
+    ],
     //eslint: {
     //    configFile: '.eslintrc'
     //},

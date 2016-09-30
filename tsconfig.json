@@ -24,8 +24,12 @@
     "outDir": "./.obj",
     "rootDir": "./src"
   },
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "typings"
   ]
 }
