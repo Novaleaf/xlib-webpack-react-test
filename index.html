@@ -1,19 +1,25 @@
 ﻿<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Add the logLevel="DEBUG" envLevel="PREPROD" isTest="TRUE" isDev="TRUE" properties to the html tag below, this will initialize xlib's environment variables -->
+<html xmlns="http://www.w3.org/1999/xhtml" logLevel="DEBUG" envLevel="PREPROD" isTest="TRUE" isDev="TRUE">
 <head>
     <meta charset="utf-8" />
     <title>Hello React!</title>
 </head>
 <body>
-    <div id="example"></div>
+    <div id="react-mount"></div>
+
+    <!-- load scripts at the end to allow dom elements to load -->
 
     <!--­ Dependencies ­-->­­     
-    <script src="./node_modules/react/dist/react.js"></script>
-    <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+    <!--<script src="./node_modules/react/dist/react.js"></script>
+    <script src="./node_modules/react-dom/dist/react-dom.js"></script>-->
     <!-- Main -->­­ 
+
+    <script src="./dist/base-vendors.js"></script>
+    <script src="./dist/common-internal.js"></script>
+    <script src="./dist/blib.js"></script>
     <script src="./dist/xlib.js"></script>
-    <script src="./dist/bundle.js"></script>
+    <script src="./dist/app.js"></script>
 
 </body>
 </html>

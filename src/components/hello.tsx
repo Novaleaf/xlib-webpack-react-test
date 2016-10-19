@@ -1,4 +1,6 @@
-﻿import * as React from "react";
+﻿
+import * as blib from "blib";
+import { React, ReactDom, Redux, ReactRedux, ReactRouter, ReactRouterRedux, ReduxLogger } from "blib";
 
 export interface HelloProps {
     compiler: string;
