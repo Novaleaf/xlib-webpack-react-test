@@ -35,6 +35,10 @@ module.exports = {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
+    node: {
+        //no-ops the fs module if it's tried to be loaded (For example, source-map-loader tries to)
+      fs: "empty"
+    },
     /**
 	module.loaders
 
@@ -66,11 +70,11 @@ module.exports = {
                 //    /.*\.obj.*/,
                 //], 
             },   
-			// no-op the source-map-support module, which provides proper loading/consumption of source maps (useful for typescript) on nodejs
-            {
-                test: /.*[/\\]source-map-support[/\\]source-map-support\.js$/,
-                loader: "null-loader",
-            },
+		//	// no-op the source-map-support module, which provides proper loading/consumption of source maps (useful for typescript) on nodejs
+        //    {
+        //        test: /.*[/\\]source-map-support[/\\]source-map-support\.js$/,
+        //        loader: "null-loader",
+        //    },
 			////es2015 to es5.  see https://github.com/babel/babel-loader
 			////requires npm install babel-loader babel-core babel-preset-es2015 --save-dev
 			//{

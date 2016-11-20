@@ -21,7 +21,9 @@ import { Bar } from "./bar";
 
 
 export module _internal {
-    export interface _AppProps extends ReactRouter.RouteComponentProps<{}, { id: number }> {
+
+    /** any component that is routed to by react-router will get a ReactRouter.RouteComponentProps */
+    export interface _AppProps extends ReactRouter.RouteComponentProps<{}, { /**specify signature of props.routeParams*/ id: number }> {
         pushPath: (path: string, state?: any, avoidRouterUpdate?: boolean | {}) => void;
     }
     export class _App extends React.Component<_AppProps, {}>{
@@ -30,6 +32,7 @@ export module _internal {
             this.state = {};
         }
         render() {
+//            log.info(this.props);
             return (
                 <div>
                     <header>
